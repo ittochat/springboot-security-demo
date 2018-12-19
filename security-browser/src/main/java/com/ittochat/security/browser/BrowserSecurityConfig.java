@@ -8,12 +8,20 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private SecurityProperties securityProperties;
+
+    @Autowired
+    private AuthenticationSuccessHandler ittochatAuthenticationSuccessHandler;
+
+    @Autowired
+    private AuthenticationFailureHandler ittochatAuthenticationFailureHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -25,6 +33,8 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin()
                 .loginPage(securityProperties.getBrowser().getLoginPage())
                 .loginProcessingUrl("/authentication/from")
+                .successHandler(ittochatAuthenticationSuccessHandler)
+                .failureHandler(ittochatAuthenticationFailureHandler)
         //http.httpBasic()
                 .and()
                 .authorizeRequests()

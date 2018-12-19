@@ -28,3 +28,5 @@
 /mgr/target/
 /core/target/
 /security-demo/target/
+/security-browser/target/
+/security-core/target/

@@ -15,7 +15,8 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
 
-ittochat:
-  security:
-    browser:
-      loginPage: /demo-signIn.html
+#ittochat:
+#  security:
+#    browser:
+#      loginPage: /demo-signIn.html
+#      loginType: REDIRECT
